@@ -1,0 +1,27 @@
+name: Gerar instalador Windows
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Publicar aplicativo independente
+        run: dotnet publish app/MonitorEpsonL395.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -o publish
+      - name: Instalar compilador de instalador
+        run: choco install innosetup -y --no-progress
+      - name: Criar instalador
+        shell: pwsh
+        run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss'
+      - name: Compactar instalador
+        shell: pwsh
+        run: Compress-Archive -Path output/Monitor_Epson_L395_Setup.exe -DestinationPath Monitor_Epson_L395_Instalador.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Monitor_Epson_L395_Instalador
+          path: Monitor_Epson_L395_Instalador.zip
