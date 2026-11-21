@@ -1,0 +1,21 @@
+MONITOR EPSON L395 — PROJETO PARA COMPILAÇÃO NO GITHUB
+VERSÃO EXPERIMENTAL 0.1 — NÃO TESTADA EM WINDOWS
+
+ESTE ZIP CONTÉM O CÓDIGO-FONTE E O PROCESSO AUTOMÁTICO DE COMPILAÇÃO.
+NÃO CONTÉM O INSTALADOR .EXE.
+
+O workflow .github/workflows/windows-installer.yml pode compilar no GitHub Actions em Windows e disponibilizar um artefato ZIP com o instalador.
+
+LIMITAÇÕES IMPORTANTES:
+- Monitoramento da fila a cada 30 segundos: impressões rápidas podem não ser capturadas.
+- A contagem de páginas pode ser desconhecida ou imprecisa.
+- Número de cópias não é confirmado pela API usada.
+- Foto ou folha comum não podem ser identificadas com segurança pelo método atual.
+- Valores de R$ 5,00/foto e R$ 0,50/folha NÃO são calculados automaticamente nesta versão para evitar cobranças inventadas.
+- Histórico mensal em CSV e painel básico implementados.
+- Inicialização automática precisa ser ativada no botão do programa.
+- Requer que o Windows disponibilize o comando Get-PrintJob (módulo PrintManagement).
+- O aplicativo não altera trabalhos nem configurações da impressora.
+- Nenhum teste de compilação ou execução foi feito neste ambiente.
+
+ESTE PROJETO NÃO ATENDE AINDA TODOS OS REQUISITOS DE PRODUÇÃO.
